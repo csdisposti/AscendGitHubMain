@@ -34,7 +34,7 @@ public class AscendMain {
             //int selection = getMenuSelection(in);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            System.out.println("Creating statement.");
             String sql;
 
             //print all from the tables
@@ -96,10 +96,18 @@ public class AscendMain {
 
 
     static class MyHandler implements HttpHandler {
+        String response;
         @Override
         public void handle(HttpExchange t) throws IOException {
-
-            String response = readFile(FILENAME);
+            if(RequestUtil.getRequestProp(t.getRequestBody()) != null)
+            {
+                //get the dynamic
+                response = readFile("mainpage.html");
+            }
+            else
+            {
+                response = readFile("mainpage.html");
+            }
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
