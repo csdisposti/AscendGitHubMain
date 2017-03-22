@@ -11,7 +11,10 @@
 		}
 		body
 		{
-		background-color: #777777;
+		    font-family: Helvetica, sans-serif;
+		    background: #aebcbf; /* Old browsers */
+            background: -webkit-linear-gradient(top, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		}
 		header
 		{
@@ -43,6 +46,16 @@
 			float: right;
 			border: 1px solid blue;
 		}
+		article#dynamic p
+		{
+		    text-align:center;
+		}
+		article#dynamic form
+		{
+		    width: 50%;
+		    margin-left:auto;
+		    margin-right:auto;
+		}
 		div#clear
 		{
 			clear:both;
@@ -53,6 +66,11 @@
 			margin-left: auto;
 			margin-right: auto;
 			border: 1px solid yellow;
+			color: white;
+		}
+		footer p
+		{
+		    text-align: center;
 		}
 		</style>
 </head>
@@ -62,9 +80,10 @@
 </header>
 <section>
     <nav id = "menu">
+        <button>MENU ITEM</button>
     </nav>
     <article id = "dynamic">
-        <p id = "ASCEND">Welcome to ascend</p>
+        <p id = "ASCEND">Welcome to Ascend</p>
         <form method="POST">
             Username:<br />
             <input type="text" name="usr" required/><br />
@@ -76,6 +95,7 @@
     <div id="clear"></div>
 </section>
 <footer>
+    <p id="">COPYRIGHT &COPY; ASCEND INC. 2017; ALL RIGHTS RESERVED</p>
 </footer>
 </body>
 </html>
