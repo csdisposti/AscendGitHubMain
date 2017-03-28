@@ -102,6 +102,8 @@ public class AscendMain {
             if(RequestUtil.getRequestProp(t.getRequestBody()) != null)
             {
                 //get the dynamic
+                //read the "action" hidden attribute from the requestBody
+                //do some if stuff to get the appropriate actions
                 response = readFile("mainpage.html");
             }
             else
