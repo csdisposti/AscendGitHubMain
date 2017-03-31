@@ -1,121 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href=""/>
-    <style type="text/css">
-		body, header, footer, section, nav
-		{
-			margin: 0;
-			padding: 0;
-			border: 0;
-		}
-		body
-		{
-		    font-family: Helvetica, sans-serif;
-		    background: #aebcbf; /* Old browsers */
-            background: -webkit-linear-gradient(top, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to bottom, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		}
-		header
-		{
-			background-color: white;
-			width: 75%;
-			margin-left: auto;
-			margin-right: auto;
-			border: 1px solid black;
-		}
-		section
-		{
-			width: 75%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		nav#menu
-		{
-			background-color: white;
-			width:10%;
-			float:left;
-			box-sizing: border-box;
-			border: 1px solid red;
-		}
-		article#dynamic
-		{
-			background-color: white;
-			box-sizing: border-box;
-			width:90%;
-			float: right;
-			border: 1px solid blue;
-		}
-		article#dynamic p
-		{
-		    text-align:center;
-		}
-		article#dynamic form
-		{
-		    width: 50%;
-		    margin-left:auto;
-		    margin-right:auto;
-		}
-		div#clear
-		{
-			clear:both;
-		}
-        .text-left
-        {
-            text-align: left;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .text-center
-        {
-            text-align: center;
-        }
-        .center-block
-        {
-            display: block;
-            margin-right: auto;
-            margin-left: auto;
-        }
-		footer
-		{
-			width: 75%;
-			margin-left: auto;
-			margin-right: auto;
-			border: 1px solid yellow;
-			color: white;
-		}
-		footer p
-		{
-		    text-align: center;
-		}
-		</style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css"/>
+
 </head>
 <body>
-<header>
-    <div class="text-center">
-        <img alt="ascend logo" class="center-block" src="http://ascend.2ndmm.com/images/logo.png"/>
+<div class="container-fluid">
+    <header class="text-center">
+
+        <img alt="ascend logo" class="img-responsive center-block" src="http://ascend.2ndmm.com/images/logo.png"/>
+        <hr>
+    </header>
+    <!--begin main text-->
+    <div class="row gray text-center">
+        <h2>Flight Club Scheduling</h2>
+        <h4>Login or sign up below to access the power of Ascend and begin <em>Soaring to New Heights</em>.</h4>
+        <hr>
+        <div class="col-sm-6">
+            <h3>Existing Members</h3>
+            <p>If you are an existing member, please login. </p>
+            <form method="POST">
+                <input type="hidden"  name="action" value="login">
+                <label for="usr">Username:</label><br />
+                <input type="text" name="usr" title="username" required/><br />
+                <label for="psw">Password:</label><br />
+                <input type="password" name="psw" title="password" required/> <br />
+                <input type="submit"  class="btn btn-default btn-sp" value="Login" />
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <h3>New Members</h3>
+            <p>If you are new to Ascend, please enter your email to begin the sign up process.</p>
+            <form method="POST">
+                <input type="hidden" name="action" value="register">
+                <label for="email">Email:</label><br />
+                <input type="text" name="email" title="email" required/><br />
+                <input type="submit"  class="btn btn-default btn-sp" value="Sign Up" />
+            </form>
+        </div>
+        <img src="images/plane1.jpg" class="img-responsive center-block">
+        <hr>
+        <footer class="text-center">
+            <h4>Ascend, Inc. - <em>Soaring to New Heights</em></h4>
+            <address>
+			<span>
+
+				<a href="mailto:csdisposti@my.waketech.edu?subject=Ascend,Inc." class="email_break">
+				<span>info@ascend.2ndmm.com</span></a>
+			</span><br>
+
+				<span>919-866-5000</span><br>
+                <span>9101 Fayetteville Road
+				<br>Raleigh</span>,
+				<span>NC</span>
+				<span>27603 </span>
+
+            </address>
+            <p>Copyright 2017 Ascend, Inc.<br>All rights reserved</p>
+        </footer>
+        <hr>
     </div>
-</header>
-<section>
-    <nav id = "menu">
-        <button>MENU ITEM</button>
-    </nav>
-    <article id = "dynamic">
-        <p id = "ASCEND">Welcome to Ascend</p>
-        <form method="POST">
-            <input type="hidden" name="action" value="login">
-            Username:<br />
-            <input type="text" name="usr" required/><br />
-            Password:<br />
-            <input type="password" name="psw" required/> <br />
-            <input type = "submit" />
-        </form>
-    </article>
-    <div id="clear"></div>
-</section>
-<footer>
-    <p id="">COPYRIGHT &COPY; ASCEND INC. 2017; ALL RIGHTS RESERVED</p>
-</footer>
+    <!--end main text-->
+
+
+</div>
 </body>
 </html>
