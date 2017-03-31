@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a31a1876-a2ed-4a64-acf7-374a76abdf5d" name="Default" comment="Edited index.html page and added a css file and image folder">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
@@ -902,7 +901,7 @@
       <workItem from="1489522447727" duration="5279000" />
       <workItem from="1489762582793" duration="3953000" />
       <workItem from="1490729863373" duration="552000" />
-      <workItem from="1490974484791" duration="1088000" />
+      <workItem from="1490974484791" duration="1172000" />
     </task>
     <task id="LOCAL-00001" summary="Cleaned up css in mainpage.html">
       <created>1490730044387</created>
@@ -932,11 +931,18 @@
       <option name="project" value="LOCAL" />
       <updated>1490974596953</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Edited index.html page and added a css file and image folder">
+      <created>1490978239730</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1490978239730</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10872000" />
+    <option name="totallyTimeSpent" value="10956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
