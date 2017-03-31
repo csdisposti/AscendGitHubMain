@@ -104,11 +104,11 @@ public class AscendMain {
                 //get the dynamic
                 //read the "action" hidden attribute from the requestBody
                 //do some if stuff to get the appropriate actions
-                response = readFile("mainpage.html");
+                response = readFile("index.html");
             }
             else
             {
-                response = readFile("mainpage.html");
+                response = readFile("index.html");
             }
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
