@@ -184,7 +184,6 @@ public class Member {
             }
         }
     }
-
     @Override
     public String toString() {
         return this.memId+" "+this.acctNo+" "+this.emailUsNa+" "+this.fName+" "+this.lName+" "+this.phone1+" "+this.phone2+" "+this.emerCoNa+" "+this.memCom;
