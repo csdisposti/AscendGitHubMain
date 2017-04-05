@@ -145,6 +145,7 @@ public class Member {
     {
         java.sql.Connection connection;
 
+        
         String username = "MasterAscend";
         String password = "AscendMasterKey";
         Properties prop = new Properties();
