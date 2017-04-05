@@ -159,7 +159,7 @@ public class Member {
             java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblMember WHERE FName='"+fname+"' AND LName='"+lname+"' AND Email_User='"+email+"';");
 
             if (rs != null) {
-                //makes sure not in header info
+                //makes sure the resultSet isn't in the header info
                 rs.next();
 
                 this.memId = rs.getLong("MemberID");

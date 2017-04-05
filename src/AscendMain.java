@@ -114,6 +114,7 @@ public class AscendMain {
                 }
                 Member m = new Member();
                 try {
+                    //Testing the pull from Database
                     m.readFromDatabase("Norma", "Allen", "nallen0@ucsd.edc");
                     System.out.println(m);
                 } catch (Exception e){}
