@@ -1,17 +1,21 @@
+import java.io.FileInputStream;
+import java.sql.DriverManager;
+import java.util.Properties;
+
 /**
  * Created by cdisp on 3/15/2017.
  */
 public class Member {
 
-    private long memId;
-    private long acctNo;
-    private String emailUsNa;
-    private String fName;
-    private String lName;
-    private String phone1;
-    private String phone2;
-    private String emerCoNa;
-    private String memCom;
+    private long memId;         //MemberID
+    private long acctNo;        //AccountNo
+    private String emailUsNa;   //Email_UserName
+    private String fName;       //Fname
+    private String lName;       //Lname
+    private String phone1;      //Phone1
+    private String phone2;      //Phone2
+    private String emerCoNa;    //EmergencyContactName
+    private String memCom;      //MemberComments
 
     //default constructor
     //public Member() {
@@ -31,6 +35,19 @@ public class Member {
         this.phone2 = phone2;
         this.emerCoNa = emerCoNa;
         this.memCom = memCom;
+    }
+    //empty constructor
+    public Member()
+    {
+        this.memId = 0L;
+        this.acctNo = 0L;
+        this.emailUsNa = null;
+        this.fName = null;
+        this.lName = null;
+        this.phone1 = null;
+        this.phone2 = null;
+        this.emerCoNa = null;
+        this.memCom = null;
     }
 
     //get Member's ID
@@ -121,5 +138,55 @@ public class Member {
     //set Member's Comments
     public void setMemCom(String memCom) {
         this.memCom = memCom;
+    }
+
+    //read data from database to this class
+    public void readFromDatabase(String fname, String lname, String email) throws Exception
+    {
+        java.sql.Connection connection;
+
+        String username = "MasterAscend";
+        String password = "AscendMasterKey";
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("database.properties"));
+        String url = prop.getProperty("jdbc.url");
+        String driver = prop.getProperty("jdbc.driver");
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, username, password);
+        try {
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblMember WHERE FName='"+fname+"' AND LName='"+lname+"' AND Email_User='"+email+"';");
+
+            if (rs != null) {
+                rs.next();
+                this.memId = rs.getLong("MemberID");
+                this.acctNo = rs.getLong(2);
+                this.emailUsNa = rs.getString(3);
+                this.fName = rs.getString(4);
+                this.lName = rs.getString(5);
+                this.phone1 = rs.getString(6);
+                this.phone2 = rs.getString(7);
+                this.emerCoNa = rs.getString(8);
+                this.memCom = rs.getString(9);
+            }
+        } catch (Exception e)
+        {
+            System.err.println("err");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                connection.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.memId+" "+this.acctNo+" "+this.emailUsNa+" "+this.fName+" "+this.lName+" "+this.phone1+" "+this.phone2+" "+this.emerCoNa+" "+this.memCom;
     }
 }

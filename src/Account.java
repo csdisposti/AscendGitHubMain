@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.util.Date;
 
 /**
@@ -176,5 +177,15 @@ public class Account {
     //set Account Comments
     public void setAcctCom(String acctCom) {
         this.acctCom = acctCom;
+    }
+
+    //write to database
+    public void readFromDatabase()
+    {
+
+    }
+    public void writeToDatabase()
+    {
+        //java.sql.Connection c = AscendMain.conn;
     }
 }
