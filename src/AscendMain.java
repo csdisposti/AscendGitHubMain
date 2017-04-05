@@ -114,6 +114,7 @@ public class AscendMain {
                 }
                 Member m = new Member();
                 try {
+                    //test, not to stay
                     m.readFromDatabase("Norma", "Allen", "nallen0@ucsd.edc");
                     System.out.println(m);
                 } catch (Exception e){}
@@ -123,6 +124,7 @@ public class AscendMain {
             {
                 Member m = new Member();
                 try {
+                    //test not to stay
                     m.readFromDatabase("Norma", "Allen", "nallen0@ucsd.edc");
                     System.out.println(m);
                 } catch (Exception e){}

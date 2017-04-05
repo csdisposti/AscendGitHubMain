@@ -158,7 +158,9 @@ public class Member {
             java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblMember WHERE FName='"+fname+"' AND LName='"+lname+"' AND Email_User='"+email+"';");
 
             if (rs != null) {
+                //makes sure not in header info
                 rs.next();
+
                 this.memId = rs.getLong("MemberID");
                 this.acctNo = rs.getLong(2);
                 this.emailUsNa = rs.getString(3);
