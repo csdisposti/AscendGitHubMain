@@ -84,17 +84,9 @@ public class Administrator {
         this.adminCom = adminCom;
     }
 
-    public void readFromDatabase(String accID) throws Exception
+    public void readFromDatabase(String accID)
     {
-        java.sql.Connection connection;
-        String username = "MasterAscend";
-        String password = "AscendMasterKey";
-        Properties prop = new Properties();
-        prop.load(new FileInputStream("database.properties"));
-        String url = prop.getProperty("jdbc.url");
-        String driver = prop.getProperty("jdbc.driver");
-        Class.forName(driver);
-        connection = DriverManager.getConnection(url, username, password);
+        java.sql.Connection connection = AscendMain.conn;
         try {
             java.sql.Statement statement = connection.createStatement();
             java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblAdministrator WHERE MemberNo="+accID+";");
@@ -114,15 +106,6 @@ public class Administrator {
         {
             System.err.println("err");
             e.printStackTrace();
-        } finally
-        {
-            try
-            {
-                connection.close();
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
         }
     }
     public void writeToDatabase()
