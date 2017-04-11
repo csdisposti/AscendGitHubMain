@@ -1,5 +1,8 @@
+import java.io.FileInputStream;
+import java.sql.DriverManager;
 import java.sql.Time;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Created by cdisp on 3/15/2017.
@@ -129,5 +132,55 @@ public class Reservations {
     //set Reservation Comments
     public void setResCom(String resCom) {
         this.resCom = resCom;
+    }
+
+    public void readFromDatabase(String ReservationID) throws Exception
+    {
+        java.sql.Connection connection;
+        String username = "MasterAscend";
+        String password = "AscendMasterKey";
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("database.properties"));
+        String url = prop.getProperty("jdbc.url");
+        String driver = prop.getProperty("jdbc.driver");
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, username, password);
+        try {
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblReservations WHERE ReservationID="+ReservationID+";");
+
+            if (rs != null) {
+                //makes sure the resultSet isn't in the header info
+                rs.next();
+
+                this.resId = rs.getLong("ReservationID");
+                this.resBy = rs.getLong("ReservedBy");
+                this.resType = rs.getString("ReservationType");
+                this.resourcesRes = rs.getString("ResourceReserved");
+                this.rseDate = rs.getDate("ReservationDate");
+                this.outTime = rs.getTime("OutTime");
+                this.inTime = rs.getTime("InTime");
+                this.dest = rs.getString("Destination");
+                this.instNo = rs.getLong("InstructorNo");
+                this.resCom = rs.getString("ReservationComments");
+            }
+        } catch (Exception e)
+        {
+            System.err.println("err");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                connection.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void writeToDatabase()
+    {
+        //java.sql.Connection c = AscendMain.conn;
     }
 }

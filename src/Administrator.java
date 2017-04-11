@@ -1,4 +1,7 @@
+import java.io.FileInputStream;
+import java.sql.DriverManager;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Created by cdisp on 3/15/2017.
@@ -79,6 +82,52 @@ public class Administrator {
     //set Admin Comments
     public void setAdminCom(String adminCom) {
         this.adminCom = adminCom;
+    }
+
+    public void readFromDatabase(String accID) throws Exception
+    {
+        java.sql.Connection connection;
+        String username = "MasterAscend";
+        String password = "AscendMasterKey";
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("database.properties"));
+        String url = prop.getProperty("jdbc.url");
+        String driver = prop.getProperty("jdbc.driver");
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, username, password);
+        try {
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblAdministrator WHERE MemberNo="+accID+";");
+
+            if (rs != null) {
+                //makes sure the resultSet isn't in the header info
+                rs.next();
+
+                this.adminId = rs.getLong("AdministratorID");
+                this.memNo = rs.getLong("MemberNo");
+                this.adminLev = rs.getString("AdminLevel");
+                this.dateSetAdmin = rs.getDate("DateSetAsAdmin");
+                this.dateRevAdmin = rs.getDate("DateRemoved");
+                this.adminCom = rs.getString("AdminComments");
+            }
+        } catch (Exception e)
+        {
+            System.err.println("err");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                connection.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void writeToDatabase()
+    {
+        //java.sql.Connection c = AscendMain.conn;
     }
 }
 

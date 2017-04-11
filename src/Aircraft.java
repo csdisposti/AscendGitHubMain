@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.sql.DriverManager;
+import java.util.Date;
+import java.util.Properties;
+
 /**
  * Created by cdisp on 3/17/2017.
  */
@@ -11,11 +16,11 @@ public class Aircraft {
     private long flightHrs;
     private long flightDist;
     private String lastMaintType;
-    private String lastMaintDate;
+    private Date lastMaintDate;
     private String airCom;
 
     public Aircraft(String reg, long ownId, String makeModel, String airType, double rentFee,
-                    long airAge, long flightHrs, long flightDist, String lastMaintType, String lastMaintDate, String airCom) {
+                    long airAge, long flightHrs, long flightDist, String lastMaintType, Date lastMaintDate, String airCom) {
         this.reg = reg;
         this.ownId = ownId;
         this.makeModel = makeModel;
@@ -120,12 +125,12 @@ public class Aircraft {
     }
 
     //get Aircraft Last Maintenance Date
-    public String getLastMaintDate() {
+    public Date getLastMaintDate() {
         return lastMaintDate;
     }
 
     //set Aircraft Last Maintenance Date
-    public void setLastMaintDate(String lastMaintDate) {
+    public void setLastMaintDate(Date lastMaintDate) {
         this.lastMaintDate = lastMaintDate;
     }
 
@@ -137,5 +142,56 @@ public class Aircraft {
     //set Aircraft Comments
     public void setAirCom(String airCom) {
         this.airCom = airCom;
+    }
+
+    public void readFromDatabase(String Registration) throws Exception
+    {
+        java.sql.Connection connection;
+        String username = "MasterAscend";
+        String password = "AscendMasterKey";
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("database.properties"));
+        String url = prop.getProperty("jdbc.url");
+        String driver = prop.getProperty("jdbc.driver");
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, username, password);
+        try {
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblAircraft WHERE Registration='"+Registration+"';");
+
+            if (rs != null) {
+                //makes sure the resultSet isn't in the header info
+                rs.next();
+
+                this.reg = rs.getString("Registration");
+                this.ownId = rs.getLong("OwnerID");
+                this.makeModel = rs.getString("Make_Model");
+                this.airType = rs.getString("AircraftType");
+                this.rentFee = rs.getDouble("RentalFee");
+                this.airAge = rs.getLong("AircraftAge");
+                this.flightHrs = rs.getLong("FlightHours");
+                this.flightDist = rs.getLong("FlightDistance");
+                this.lastMaintType = rs.getString("LastMaintenanceType");
+                this.lastMaintDate = rs.getDate("LastMaintenanceDate");
+                this.airCom = rs.getString("AircraftComments");
+            }
+        } catch (Exception e)
+        {
+            System.err.println("err");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                connection.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void writeToDatabase()
+    {
+        //java.sql.Connection c = AscendMain.conn;
     }
 }

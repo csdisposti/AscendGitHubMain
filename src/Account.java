@@ -1,5 +1,8 @@
+import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Created by cdisp on 3/17/2017.
@@ -180,9 +183,54 @@ public class Account {
     }
 
     //write to database
-    public void readFromDatabase()
+    public void readFromDatabase(String accID) throws Exception
     {
+        java.sql.Connection connection;
+        String username = "MasterAscend";
+        String password = "AscendMasterKey";
+        Properties prop = new Properties();
+        prop.load(new FileInputStream("database.properties"));
+        String url = prop.getProperty("jdbc.url");
+        String driver = prop.getProperty("jdbc.driver");
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, username, password);
+        try {
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet rs = statement.executeQuery("SELECT * FROM tblAccount WHERE MemberNo="+accID+";");
 
+            if (rs != null) {
+                //makes sure the resultSet isn't in the header info
+                rs.next();
+
+                this.acctId = rs.getLong("AccountID");
+                this.acctType = rs.getString("AccountType");
+                this.street = rs.getString("StreetAddress");
+                this.city = rs.getString("City");
+                this.state = rs.getString("State");
+                this.zip = rs.getString("Zip");
+                this.paymentPlan = rs.getString("PaymentPlan");
+                this.totalChgs = rs.getDouble("TotalCharges");
+                this.totalPays = rs.getDouble("TotalPayments");
+                this.creditReds = rs.getDouble("Credits_Reductions");
+                this.lastInvDate = rs.getDate("LastInvoiceDate");
+                this.lastPayDate = rs.getDate("LastPaymentDate");
+                this.creditReds = rs.getDouble("AccountStatus");
+                this.acctCom = rs.getString("AccountComments");
+            }
+        } catch (Exception e)
+        {
+            System.err.println("err");
+            e.printStackTrace();
+        } finally
+        {
+            try
+            {
+                connection.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
     public void writeToDatabase()
     {
